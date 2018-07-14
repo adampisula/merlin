@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="380.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="merlin.FXMLDocumentController">
+   <children>
+      <AnchorPane fx:id="topbar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="383.0" style="-fx-background-color: #3D4956;">
+         <children>
+            <ImageView fx:id="button_console" fitHeight="32.0" fitWidth="32.0" layoutX="50.0" layoutY="17.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/console.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="button_devices" fitHeight="32.0" fitWidth="32.0" layoutX="134.0" layoutY="17.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/devices.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="button_settings" fitHeight="32.0" fitWidth="32.0" layoutX="215.0" layoutY="17.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/settings.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="button_close" fitHeight="32.0" fitWidth="32.0" layoutX="299.0" layoutY="17.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="settings" layoutY="69.0" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #3D4956;" visible="false">
+         <children>
+            <Label layoutX="24.0" layoutY="23.0" text="Settings" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Mono Light" size="22.0" />
+               </font>
+            </Label>
+            <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="devices" layoutY="69.0" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #3D4956;" visible="false">
+         <children>
+            <Label layoutX="24.0" layoutY="23.0" text="Devices" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Mono Light" size="22.0" />
+               </font>
+            </Label>
+            <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="console" layoutY="69.0" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #3D4956;">
+         <children>
+            <Label layoutX="24.0" layoutY="23.0" text="Console" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Mono Light" size="22.0" />
+               </font>
+            </Label>
+            <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
+         </children>
+      </AnchorPane>
+      <Pane fx:id="console_ind" layoutX="28.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #3D4956;" />
+      <Pane fx:id="devices_ind" layoutX="112.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #3D4956;" visible="false" />
+      <Pane fx:id="settings_ind" layoutX="193.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #3D4956;" visible="false" />
+   </children>
+</AnchorPane>
