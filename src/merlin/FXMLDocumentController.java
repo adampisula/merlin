@@ -29,49 +29,49 @@ public class FXMLDocumentController implements Initializable {
     private Pane console_ind, devices_ind, settings_ind;
     
     @FXML
-    private AnchorPane h_console, h_devices, h_settings;
+    private AnchorPane console, devices, settings;
     
     @FXML
     private void handleButtonAction(MouseEvent event) {
         if(event.getTarget() == button_console) {
-            h_devices.setVisible(false);
+            devices.setVisible(false);
             devices_ind.setVisible(false);
-            h_settings.setVisible(false);
+            settings.setVisible(false);
             settings_ind.setVisible(false);
-            h_console.setVisible(true);
-            h_console.setVisible(true);
+            console.setVisible(true);
+            console_ind.setVisible(true);
             
             System.out.print("Console");
         }
         
         else if(event.getTarget() == button_devices) {
-            h_console.setVisible(false);
+            console.setVisible(false);
             console_ind.setVisible(false);
-            h_settings.setVisible(false);
+            settings.setVisible(false);
             settings_ind.setVisible(false);
-            h_devices.setVisible(true);
+            devices.setVisible(true);
             devices_ind.setVisible(true);
             
             System.out.print("Devices");
         }
         
         else if(event.getTarget() == button_settings) {
-            h_console.setVisible(false);
+            console.setVisible(false);
             console_ind.setVisible(false);
-            h_devices.setVisible(false);
+            devices.setVisible(false);
             devices_ind.setVisible(false);
-            h_settings.setVisible(true);
+            settings.setVisible(true);
             settings_ind.setVisible(true);
             
             System.out.print("Settings");
         }
         
         else if(event.getTarget() == button_close) {
-            h_console.setVisible(false);
+            console.setVisible(false);
             console_ind.setVisible(false);
-            h_devices.setVisible(false);
+            devices.setVisible(false);
             devices_ind.setVisible(false);
-            h_settings.setVisible(false);
+            settings.setVisible(false);
             settings_ind.setVisible(false);
             
             System.out.print("Close");
