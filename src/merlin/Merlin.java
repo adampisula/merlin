@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,7 +27,14 @@ public class Merlin extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        
         stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setTitle("Merlin");
+        stage.setAlwaysOnTop(true);
+        
+        Image applicationIcon = new Image(getClass().getResourceAsStream("images/icon.png"));
+        stage.getIcons().add(applicationIcon);
+        
         Scene scene = new Scene(root);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
         

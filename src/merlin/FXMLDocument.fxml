@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="380.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="merlin.FXMLDocumentController">
    <children>
-      <AnchorPane fx:id="topbar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="383.0" style="-fx-background-color: #3D4956;">
+      <AnchorPane fx:id="topbar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="383.0" style="-fx-background-color: #181818;">
          <children>
             <ImageView fx:id="button_console" fitHeight="32.0" fitWidth="32.0" layoutX="50.0" layoutY="17.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -48,46 +48,16 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="settings" layoutY="69.0" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #3D4956;" visible="false">
-         <children>
-            <Label layoutX="24.0" layoutY="23.0" text="Settings" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Mono Light" size="22.0" />
-               </font>
-            </Label>
-            <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="devices" layoutY="69.0" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #3D4956;" visible="false">
-         <children>
-            <Label layoutX="24.0" layoutY="23.0" text="Devices" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Mono Light" size="22.0" />
-               </font>
-            </Label>
-            <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="console" layoutY="69.0" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #3D4956;" visible="false">
-         <children>
-            <Label layoutX="24.0" layoutY="23.0" text="Console" textFill="WHITE">
-               <font>
-                  <Font name="Roboto Mono Light" size="22.0" />
-               </font>
-            </Label>
-            <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="close" layoutY="69.0" prefHeight="198.0" prefWidth="383.0" style="-fx-background-color: #3D4956;" visible="false">
+      <AnchorPane fx:id="close" layoutY="69.0" prefHeight="198.0" prefWidth="383.0" style="-fx-background-color: #181818;" visible="false">
          <children>
             <Label layoutX="24.0" layoutY="23.0" text="Are you sure you want&#10;to close Merlin?" textFill="WHITE">
                <font>
                   <Font name="Roboto Mono Light" size="22.0" />
                </font>
             </Label>
-            <Button layoutX="42.0" layoutY="112.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" style="-fx-background-color: white; -fx-border-radius: 25px; -fx-background-radius: 25px;" text="Cancel" textFill="#3D4956">
+            <Button layoutX="42.0" layoutY="112.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" style="-fx-background-color: white; -fx-border-radius: 25px; -fx-background-radius: 25px;" text="Cancel" textFill="#181818">
                <font>
-                  <Font name="Roboto Mono Light" size="20.0" />
+                  <Font name="Roboto Mono Light" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -98,9 +68,9 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Pane>
-            <Button layoutX="209.0" layoutY="112.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" style="-fx-background-color: #3d4956; -fx-border: none; -fx-border-radius: 25px; -fx-background-radius: 25px; -fx-border-color: white; -fx-border-width: 2px; -fx-border-style: solid;" text="Yes" textFill="WHITE">
+            <Button layoutX="209.0" layoutY="112.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" style="-fx-background-color: #181818; -fx-border: none; -fx-border-radius: 25px; -fx-background-radius: 25px; -fx-border-color: white; -fx-border-width: 2px; -fx-border-style: solid;" text="Yes" textFill="WHITE">
                <font>
-                  <Font name="Roboto Mono Light" size="20.0" />
+                  <Font name="Roboto Mono Light" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -113,9 +83,45 @@
             </Pane>
          </children>
       </AnchorPane>
-      <Pane fx:id="console_ind" layoutX="28.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #3D4956;" visible="false" />
-      <Pane fx:id="devices_ind" layoutX="112.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #3D4956;" visible="false" />
-      <Pane fx:id="settings_ind" layoutX="193.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #3D4956;" visible="false" />
-      <Pane fx:id="close_ind" layoutX="277.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #3D4956;" visible="false" />
+      <AnchorPane fx:id="settings" layoutY="69.0" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #181818;" visible="false">
+         <children>
+            <Label layoutX="24.0" layoutY="23.0" text="Settings" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Mono Light" size="22.0" />
+               </font>
+            </Label>
+            <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="devices" layoutY="69.0" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #181818;" visible="false">
+         <children>
+            <Label layoutX="24.0" layoutY="23.0" text="Devices" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Mono Light" size="22.0" />
+               </font>
+            </Label>
+            <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="console" layoutY="69.0" onKeyPressed="#handleKeyPress" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #181818;" visible="false">
+         <children>
+            <Label layoutX="24.0" layoutY="23.0" text="Console" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Mono Light" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="console_area" alignment="TOP_LEFT" layoutX="24.0" layoutY="76.0" prefHeight="366.0" prefWidth="335.0" text="&gt; █" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Mono Light" size="13.0" />
+               </font>
+            </Label>
+            <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
+         </children>
+      </AnchorPane>
+      <Pane fx:id="indicator" layoutY="66.0" prefHeight="3.0" prefWidth="383.0" style="-fx-background-color: white;" visible="false" />
+      <Pane fx:id="console_ind" layoutX="28.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #181818;" visible="false" />
+      <Pane fx:id="devices_ind" layoutX="112.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #181818;" visible="false" />
+      <Pane fx:id="settings_ind" layoutX="193.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #181818;" visible="false" />
+      <Pane fx:id="close_ind" layoutX="277.0" layoutY="66.0" prefHeight="3.0" prefWidth="76.0" style="-fx-background-color: #181818;" visible="false" />
    </children>
 </AnchorPane>

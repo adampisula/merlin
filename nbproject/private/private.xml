@@ -4,8 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/adampisula/Documents/Projects/Merlin/src/merlin/FXMLDocumentController.java</file>
-            <file>file:/home/adampisula/Documents/Projects/Merlin/test/merlin/MerlinTest.java</file>
             <file>file:/home/adampisula/Documents/Projects/Merlin/src/merlin/Merlin.java</file>
+            <file>file:/home/adampisula/Documents/Projects/Merlin/src/merlin/FXMLDocument.fxml</file>
         </group>
     </open-files>
 </project-private>

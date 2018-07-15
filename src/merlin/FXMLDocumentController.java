@@ -8,11 +8,14 @@ package merlin;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -30,7 +33,7 @@ public class FXMLDocumentController implements Initializable {
     private ImageView button_console, button_devices, button_settings, button_close;
     
     @FXML
-    private Pane console_ind, devices_ind, settings_ind, close_ind;
+    private Pane indicator, console_ind, devices_ind, settings_ind, close_ind;
     
     @FXML
     private Pane button_close_cancel, button_close_confirm;
@@ -38,73 +41,123 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private AnchorPane console, devices, settings, close;
     
-    private boolean minimized = true;
+    @FXML
+    private Label console_area;
+    
+    private String open = "";
+    private boolean value = false;
+    private boolean console_first = true;
+    
+    private String command = "";
+    private int cursor = 0;
     
     @FXML
     private void handleButtonAction(MouseEvent event) {
         if(event.getTarget() == button_console) {
-            minimized = false;
+            if(console_first) {
+                Scene scene = (Scene) console.getScene();
+        
+                scene.addEventFilter(KeyEvent.ANY, keyEvent -> {
+                    handleKeyPress(keyEvent);
+                });
+                
+                console_first = false;
+            }
             
-            close.setVisible(false);
-            close_ind.setVisible(false);
+            if(open == "Console") {
+                value = false;
+                open = "none";
+            }
+            
+            else {
+                value = true;
+                open = "Console";
+            }
+            
+            indicator.setVisible(value);
+            console.setVisible(value);
+            console_ind.setVisible(value);
             devices.setVisible(false);
             devices_ind.setVisible(false);
             settings.setVisible(false);
             settings_ind.setVisible(false);
-            console.setVisible(true);
-            console_ind.setVisible(true);
+            close.setVisible(false);
+            close_ind.setVisible(false);
         }
         
         else if(event.getTarget() == button_devices) {
-            minimized = false;
+            if(open == "Devices") {
+                value = false;
+                open = "none";
+            }
             
-            close.setVisible(false);
-            close_ind.setVisible(false);
+            else {
+                value = true;
+                open = "Devices";
+            }
+            
+            indicator.setVisible(value);
             console.setVisible(false);
             console_ind.setVisible(false);
+            devices.setVisible(value);
+            devices_ind.setVisible(value);
             settings.setVisible(false);
             settings_ind.setVisible(false);
-            devices.setVisible(true);
-            devices_ind.setVisible(true);
-        }
-        
-        else if(event.getTarget() == button_settings) {
-            minimized = false;
-            
             close.setVisible(false);
             close_ind.setVisible(false);
+        }
+        
+        else if(event.getTarget() == button_settings) {      
+            if(open == "Settings") {
+                value = false;
+                open = "none";
+            }
+            
+            else {
+                value = true;
+                open = "Settings";
+            }
+            
+            indicator.setVisible(value);
             console.setVisible(false);
             console_ind.setVisible(false);
             devices.setVisible(false);
             devices_ind.setVisible(false);
-            settings.setVisible(true);
-            settings_ind.setVisible(true);
+            settings.setVisible(value);
+            settings_ind.setVisible(value);
+            close.setVisible(false);
+            close_ind.setVisible(false);
         }
         
         else if(event.getTarget() == button_close) {
+            if(open == "Close") {
+                value = false;
+                open = "none";
+            }
+            
+            else {
+                value = true;
+                open = "Close";
+            }
+            
+            indicator.setVisible(value);
             console.setVisible(false);
             console_ind.setVisible(false);
             devices.setVisible(false);
             devices_ind.setVisible(false);
             settings.setVisible(false);
             settings_ind.setVisible(false);
-            
-            if(minimized) {
-                close.setVisible(true);
-                close_ind.setVisible(true);
-                
-                minimized = false;
-            }
-            
-            minimized = true;
+            close.setVisible(value);
+            close_ind.setVisible(value);
         }
         
         //CLOSE PANE
         else if(event.getTarget() == button_close_cancel) {
+            open = "none";
+            
+            indicator.setVisible(false);
             close.setVisible(false);
             close_ind.setVisible(false);
-            
-            minimized = true;
         }
         
         else if(event.getTarget() == button_close_confirm) {
@@ -113,6 +166,44 @@ public class FXMLDocumentController implements Initializable {
             Stage stage = (Stage) button_close.getScene().getWindow();
             stage.close();
         }
+    }
+    
+    @FXML
+    private void handleKeyPress(KeyEvent event) {
+        char c = event.getCharacter().charAt(0);
+        
+        if(c != 0) {
+            consoleWrite(c);
+            
+            if(c != 13)
+                command += c;
+            
+            else {
+                executeCommand(command);
+                command = "";
+                
+                consoleWrite("> ");
+            }
+        }
+    }
+    
+    private void consoleWrite(char c) {
+        String curr = console_area.getText();
+        console_area.setText(curr.substring(0, curr.length() - 1) + c + "█");
+    }
+    
+    private void consoleWrite(String s) {
+        String curr = console_area.getText();
+        console_area.setText(curr.substring(0, curr.length() - 1) + s + "█");
+    }
+    
+    /*private void consoleBackspace(int cursor) {
+        String curr = console_area.getText();
+        console_area.setText(curr.substring(0, curr.length() - 1) + s + "█");
+    }*/
+    
+    private void executeCommand(String s) {
+        System.out.println("Execute: " + s);
     }
     
     @Override
