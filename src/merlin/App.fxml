@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="380.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="merlin.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="380.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="merlin.AppController">
    <children>
       <AnchorPane fx:id="topbar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="383.0" style="-fx-background-color: #181818;">
          <children>
@@ -91,6 +92,25 @@
                </font>
             </Label>
             <Separator layoutX="19.0" layoutY="60.0" prefWidth="350.0" />
+            <Label layoutX="24.0" layoutY="80.0" text="Online mode" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Mono Light" size="16.0" />
+               </font>
+            </Label>
+            <JFXToggleButton fx:id="toggle_online_mode" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="287.0" layoutY="62.0" toggleColor="WHITE" toggleLineColor="#979797" unToggleLineColor="#979797" />
+            <Button layoutX="137.0" layoutY="391.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" style="-fx-background-color: #181818; -fx-border: none; -fx-border-radius: 25px; -fx-background-radius: 25px; -fx-border-color: white; -fx-border-width: 2px; -fx-border-style: solid;" text="Log out" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Mono Light" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Pane fx:id="button_log_out" layoutX="137.0" layoutY="391.0" onMouseClicked="#handleButtonAction" prefHeight="50.0" prefWidth="132.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="devices" layoutY="69.0" prefHeight="461.0" prefWidth="383.0" style="-fx-background-color: #181818;" visible="false">

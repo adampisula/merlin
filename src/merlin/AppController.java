@@ -27,7 +27,7 @@ import javafx.stage.Window;
  * @author adampisula
  */
 //public class FXMLDocumentController implements Initializable {
-public class FXMLDocumentController implements Initializable {    
+public class AppController implements Initializable {    
 
     @FXML
     private ImageView button_console, button_devices, button_settings, button_close;
@@ -36,7 +36,7 @@ public class FXMLDocumentController implements Initializable {
     private Pane indicator, console_ind, devices_ind, settings_ind, close_ind;
     
     @FXML
-    private Pane button_close_cancel, button_close_confirm;
+    private Pane button_close_cancel, button_close_confirm, button_log_out;
     
     @FXML
     private AnchorPane console, devices, settings, close;
@@ -53,7 +53,9 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void handleButtonAction(MouseEvent event) {
+        //MENU
         if(event.getTarget() == button_console) {
+            //CONSOLE KEYEVENT
             if(console_first) {
                 Scene scene = (Scene) console.getScene();
         
@@ -166,6 +168,11 @@ public class FXMLDocumentController implements Initializable {
             Stage stage = (Stage) button_close.getScene().getWindow();
             stage.close();
         }
+        
+        //LOG OUT
+        else if(event.getTarget() == button_log_out) {
+            System.out.println("Logging out...");
+        }
     }
     
     @FXML
@@ -173,12 +180,13 @@ public class FXMLDocumentController implements Initializable {
         char c = event.getCharacter().charAt(0);
         
         if(c != 0) {
-            consoleWrite(c);
+            if(c == 13 || c >= 32)
+                consoleWrite(c);
             
-            if(c != 13)
+            if(c >= 32)
                 command += c;
             
-            else {
+            else if(c == 13) {
                 executeCommand(command);
                 command = "";
                 
@@ -202,8 +210,8 @@ public class FXMLDocumentController implements Initializable {
         console_area.setText(curr.substring(0, curr.length() - 1) + s + "█");
     }*/
     
-    private void executeCommand(String s) {
-        System.out.println("Execute: " + s);
+    private void executeCommand(String command) {
+        System.out.println("Execute: " + command);
     }
     
     @Override
