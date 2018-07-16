@@ -98,7 +98,7 @@
                </font>
             </Label>
             <JFXToggleButton fx:id="toggle_online_mode" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="287.0" layoutY="62.0" toggleColor="WHITE" toggleLineColor="#979797" unToggleLineColor="#979797" />
-            <Button layoutX="137.0" layoutY="391.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" style="-fx-background-color: #181818; -fx-border: none; -fx-border-radius: 25px; -fx-background-radius: 25px; -fx-border-color: white; -fx-border-width: 2px; -fx-border-style: solid;" text="Log out" textFill="WHITE">
+            <Button layoutX="130.0" layoutY="391.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="132.0" style="-fx-background-color: #181818; -fx-border: none; -fx-border-radius: 25px; -fx-background-radius: 25px; -fx-border-color: white; -fx-border-width: 2px; -fx-border-style: solid;" text="Log out" textFill="WHITE">
                <font>
                   <Font name="Roboto Mono Light" size="16.0" />
                </font>
@@ -106,7 +106,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Pane fx:id="button_log_out" layoutX="137.0" layoutY="391.0" onMouseClicked="#handleButtonAction" prefHeight="50.0" prefWidth="132.0">
+            <Pane fx:id="button_log_out" layoutX="130.0" layoutY="391.0" onMouseClicked="#handleButtonAction" prefHeight="50.0" prefWidth="132.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

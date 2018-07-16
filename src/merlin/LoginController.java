@@ -9,8 +9,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.util.ResourceBundle;
-import javafx.application.Preloader;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,12 +44,30 @@ public class LoginController implements Initializable {
     
     private double xOffset, yOffset;
             
+    public static String sha256(String base) {
+    try{
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(base.getBytes("UTF-8"));
+        StringBuffer hexString = new StringBuffer();
+
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) hexString.append('0');
+            hexString.append(hex);
+        }
+
+        return hexString.toString();
+    } catch(Exception ex){
+       throw new RuntimeException(ex);
+    }
+    }
+    
     @FXML
     private void handleButtonAction(MouseEvent event) throws IOException {
         if(event.getTarget() == button_log_in) {
-            //CONNECT TO SERVER
             System.out.println("Login: " + input_login.getText());
-            System.out.println("Password: " + input_password.getText());
+            //System.out.println("Password: " + input_password.getText());
+            System.out.println("Hash: " + sha256(input_password.getText()));
             
             Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
         

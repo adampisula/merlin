@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="488.0" prefWidth="383.0" style="-fx-background-color: #181818;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="merlin.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="488.0" prefWidth="383.0" style="-fx-background-color: #181818;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="merlin.LoginController">
    <children>
       <ImageView fitHeight="121.0" fitWidth="121.0" layoutX="131.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -47,7 +46,7 @@
             <Font name="Roboto Mono Light" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink focusTraversable="false" layoutX="130.0" layoutY="444.0" text="Forgot password?" textFill="WHITE" underline="true">
+      <Hyperlink focusTraversable="false" layoutX="112.0" layoutY="444.0" text="Forgot your password?" textFill="WHITE" underline="true">
          <font>
             <Font name="Roboto Mono Light" size="12.0" />
          </font>
