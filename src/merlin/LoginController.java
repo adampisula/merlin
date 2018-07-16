@@ -7,10 +7,16 @@ package merlin;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,9 +71,40 @@ public class LoginController implements Initializable {
     @FXML
     private void handleButtonAction(MouseEvent event) throws IOException {
         if(event.getTarget() == button_log_in) {
-            System.out.println("Login: " + input_login.getText());
+            //System.out.println("Login: " + input_login.getText());
             //System.out.println("Password: " + input_password.getText());
-            System.out.println("Hash: " + sha256(input_password.getText()));
+            //System.out.println("Hash: " + sha256(input_password.getText()));
+            
+            BufferedReader br;
+            String urlParameters  = "login=" + input_login.getText() + "&hash=" + sha256(input_password.getText());
+            byte[] postData = urlParameters.getBytes( StandardCharsets.UTF_8 );
+            int    postDataLength = postData.length;
+            String request = "http://merlin.ct8.pl/log_in.php";
+            URL    url            = new URL( request );
+            HttpURLConnection conn= (HttpURLConnection) url.openConnection();           
+            conn.setDoOutput( true );
+            conn.setInstanceFollowRedirects( false );
+            conn.setRequestMethod( "POST" );
+            conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
+            conn.setRequestProperty( "charset", "utf-8");
+            conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+            conn.setUseCaches( false );
+            try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
+               wr.write( postData );
+            }
+            
+            if (200 <= conn.getResponseCode() && conn.getResponseCode() <= 299) {
+                br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            }
+            else {
+                br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+            
+            String result = "";
+            result = br.lines().collect(Collectors.joining());
+            
+            System.out.println(urlParameters);
+            System.out.println(result);
             
             Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
         
