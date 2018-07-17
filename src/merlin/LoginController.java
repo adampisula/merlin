@@ -24,18 +24,26 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
  * @author adampisula
  */
 public class LoginController implements Initializable {
+    @FXML
+    private Label error_label;
+    
     @FXML
     private JFXTextField input_login;
     
@@ -69,18 +77,21 @@ public class LoginController implements Initializable {
     }
     
     @FXML
-    private void handleButtonAction(MouseEvent event) throws IOException {
+    private void handleKeyEvent(KeyEvent event) {
+        error_label.setVisible(false);
+    }
+    
+    @FXML
+    private void handleButtonAction(MouseEvent event) throws IOException, ParseException {
         if(event.getTarget() == button_log_in) {
-            //System.out.println("Login: " + input_login.getText());
-            //System.out.println("Password: " + input_password.getText());
-            //System.out.println("Hash: " + sha256(input_password.getText()));
+            error_label.setVisible(false);
             
             BufferedReader br;
             String urlParameters  = "login=" + input_login.getText() + "&hash=" + sha256(input_password.getText());
             byte[] postData = urlParameters.getBytes( StandardCharsets.UTF_8 );
             int    postDataLength = postData.length;
             String request = "http://merlin.ct8.pl/log_in.php";
-            URL    url            = new URL( request );
+            URL    url        = new URL( request );
             HttpURLConnection conn= (HttpURLConnection) url.openConnection();           
             conn.setDoOutput( true );
             conn.setInstanceFollowRedirects( false );
@@ -88,7 +99,7 @@ public class LoginController implements Initializable {
             conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
             conn.setRequestProperty( "charset", "utf-8");
             conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
-            conn.setUseCaches( false );
+            conn.setUseCaches( false ); //True or false?
             try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
                wr.write( postData );
             }
@@ -100,45 +111,59 @@ public class LoginController implements Initializable {
                 br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
             }
             
+            JSONParser parser = new JSONParser();
+            
             String result = "";
             result = br.lines().collect(Collectors.joining());
             
-            System.out.println(urlParameters);
-            System.out.println(result);
+            Object obj = parser.parse(result);
+            JSONObject user = (JSONObject) obj;
             
-            Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
+            if(user.get("error") == null) {
+                Parent root;
+                
+                root = FXMLLoader.load(getClass().getResource("AppUser.fxml"));
+                
+                if("ADMIN".equals((String) user.get("rank")))
+                    root = FXMLLoader.load(getClass().getResource("AppAdmin.fxml"));
         
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setTitle("Merlin");
-            stage.setAlwaysOnTop(true);
+                Stage stage = new Stage();
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setTitle("Merlin");
+                stage.setAlwaysOnTop(true);
 
-            Image applicationIcon = new Image(getClass().getResourceAsStream("images/icon.png"));
-            stage.getIcons().add(applicationIcon);
+                Image applicationIcon = new Image(getClass().getResourceAsStream("images/icon.png"));
+                stage.getIcons().add(applicationIcon);
 
-            Scene scene = new Scene(root);
-            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                Scene scene = new Scene(root);
+                scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
 
-            root.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    xOffset = event.getSceneX();
-                    yOffset = event.getSceneY();
-                }
-            });
+                root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        xOffset = event.getSceneX();
+                        yOffset = event.getSceneY();
+                    }
+                });
 
-            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    stage.setX(event.getScreenX() - xOffset);
-                    stage.setY(event.getScreenY() - yOffset);
-                }
-            });
+                root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        stage.setX(event.getScreenX() - xOffset);
+                        stage.setY(event.getScreenY() - yOffset);
+                    }
+                });
         
-            stage.setScene(scene);
-            stage.show();
+                stage.setScene(scene);
+                stage.show();
+                
+                ((Stage) button_log_in.getScene().getWindow()).close();
+            }
             
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            else {
+                error_label.setText((String) user.get("error"));
+                error_label.setVisible(true);
+            }
         }
         
         else if(event.getTarget() == button_log_in_close) {
@@ -146,6 +171,8 @@ public class LoginController implements Initializable {
             
             Stage stage = (Stage) button_log_in_close.getScene().getWindow();
             stage.close();
+            
+            System.exit(0);
         }
     }
     

@@ -5,14 +5,14 @@
  */
 package merlin;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -20,15 +20,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 /**
  *
  * @author adampisula
  */
-//public class FXMLDocumentController implements Initializable {
-public class AppController implements Initializable {    
-
+public class AppAdminController implements Initializable {   
     @FXML
     private ImageView button_console, button_devices, button_settings, button_close;
     
@@ -52,7 +49,7 @@ public class AppController implements Initializable {
     private int cursor = 0;
     
     @FXML
-    private void handleButtonAction(MouseEvent event) {
+    private void handleButtonAction(MouseEvent event) throws MalformedURLException, IOException {
         //MENU
         if(event.getTarget() == button_console) {
             //CONSOLE KEYEVENT
@@ -167,11 +164,19 @@ public class AppController implements Initializable {
             
             Stage stage = (Stage) button_close.getScene().getWindow();
             stage.close();
+            
+            System.exit(0);
         }
         
         //LOG OUT
         else if(event.getTarget() == button_log_out) {
+            String request = "http://merlin.ct8.pl/log_out.php";
+            URL  url = new URL( request );
+            HttpURLConnection conn= (HttpURLConnection) url.openConnection();
+            
             System.out.println("Logging out...");
+            
+            ((Stage) button_log_out.getScene().getWindow()).close();
         }
     }
     
@@ -205,11 +210,6 @@ public class AppController implements Initializable {
         console_area.setText(curr.substring(0, curr.length() - 1) + s + "█");
     }
     
-    /*private void consoleBackspace(int cursor) {
-        String curr = console_area.getText();
-        console_area.setText(curr.substring(0, curr.length() - 1) + s + "█");
-    }*/
-    
     private void executeCommand(String command) {
         System.out.println("Execute: " + command);
     }
@@ -218,5 +218,4 @@ public class AppController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
     }    
-    
 }
