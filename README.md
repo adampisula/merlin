@@ -2,6 +2,8 @@
 
 This is the client desktop of my **magnum opus** - Merlin.
 
+**Project abandoned.**
+
 ## Compilation
 Actually I have no idea how to compile the program outside Netbeans IDE, but I don't think it's gonna be necessary.
 
